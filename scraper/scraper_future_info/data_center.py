@@ -44,11 +44,11 @@ class Data_center():
             date_delta -= (tmp_delta + 1)
         return dates
 
-    def get_pcr(self):
+    def get_pcr(self, start_date = "2010/1/1", end_date = "2010/12/31"):
         self.init_browser()
         self.browser.get(self.pcr_url)
         pcr_df = pd.DataFrame()
-        dates = self._get_date("2010/1/1", "2010/12/31")
+        dates = self._get_date(start_date, end_date)
         for start, end in dates:
             start_tag = self.browser.find_element_by_name("queryStartDate")
             end_tag = self.browser.find_element_by_name("queryEndDate")
