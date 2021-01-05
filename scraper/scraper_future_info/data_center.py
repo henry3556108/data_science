@@ -16,6 +16,9 @@ class Data_center():
         self.browser = None
 
     def init_browser(self, hide=True):
+        '''
+        init browser, if you want to see what I do, you can change hide value to False
+        '''
         options = webdriver.ChromeOptions()
         if hide:
             options.add_argument("--headless")
@@ -23,7 +26,10 @@ class Data_center():
         options.add_argument('user-agent={}'.format(agent))
         self.browser = webdriver.Chrome(options=options)
 
-    def _get_date(self, start_date: str, end_date: str):
+    def _get_date(self, start_date: str, end_date: str) -> tuple:
+        '''
+        會回傳一連串的日期，從start_date到end_date，並且都間隔 30 日
+        '''
         start_date = datetime.datetime.strptime(start_date, "%Y/%m/%d")
         end_date = datetime.datetime.strptime(end_date, "%Y/%m/%d")
         date_delta = (end_date - start_date).days
@@ -43,7 +49,10 @@ class Data_center():
             date_delta -= (tmp_delta + 1)
         return dates
 
-    def get_pcr(self, start_date = "2010/1/1", end_date = "2010/12/31"):
+    def get_pcr(self, start_date = "2010/1/1", end_date = "2010/12/31") -> pd.DataFrame:
+        '''
+        從台灣證交所上面，抓下日期間的 PCR
+        '''
         self.init_browser()
         self.browser.get(self.pcr_url)
         pcr_df = pd.DataFrame()
@@ -64,7 +73,7 @@ class Data_center():
             table = soup.find("table", {"class": "table_a"})
             df = pd.read_html(table.prettify())
             pcr_df = pd.concat([pcr_df, df[0]])
-            # print(df[0].head())
+            
         pcr_df["日期"] = pcr_df["日期"].apply(lambda x : pd.to_datetime(x, format="%Y/%m/%d"))
         pcr_df = pcr_df.sort_values("日期")
         pcr_df = pcr_df.reset_index(drop = True)
