@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import random
 import datetime
-# from seleniumrequests import Chrome
 
 
 class Data_center():
@@ -81,25 +80,3 @@ def get_data(file_name: str) -> pd.DataFrame:
 if __name__ == "__main__":
     center = Data_center()
     center.get_pcr()
-    # df = get_data(file_name = "raw_data/EXF1-分鐘-成交價.csv")
-    # f = requests.get("/down_type=&queryStartDate=2020%2F12%2F06&queryEndDate=2021%2F01%2F05")
-    # print(f.text)
-    # d = {'down_type':'', 'queryStartDate': '2010%2F12%2F06', 'queryEndDate': '2010%2F01%2F05'}
-    # df = pd.read_html("https://www.taifex.com.tw/cht/3/pcRatio")
-    # print(df[0].head())
-    # url = 'https://www.taifex.com.tw/cht/3/pcRatio'
-    # header = {"Sec-Fetch-Dest": "document", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"}
-    # url = 'https://www.taifex.com.tw/cht/3/pcRatio'
-
-    # respone = driver.request("POST", url,  data = d)
-    # # table = driver.find_element_by_tag_name("table")
-    # # print()
-    # # print(df.head())
-    # # r = requests.post(url, data=d, headers = header)
-    # soup = BeautifulSoup(respone.text)
-    # # # soup = soup.prettify()
-    # for tr in soup.findAll("tr"):
-    #     print(tr.text)
-    # print(soup)
-    # print(r.text)
-    # print(df.head())
