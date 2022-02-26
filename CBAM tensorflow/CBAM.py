@@ -1,5 +1,3 @@
-
-from audioop import avg
 from tensorflow.keras import layers
 import tensorflow as tf
 from tensorflow.keras import regularizers
