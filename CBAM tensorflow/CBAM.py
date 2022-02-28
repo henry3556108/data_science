@@ -48,12 +48,16 @@ class CBAM(layers.Layer):
         self.C_layer = ChannelAttention(channels, reduction_ratio)
         self.S_layer = SpatialAttention()
     def call(self, input):
-        channel_out = self.C_layer(input)
-        cbam_out = self.S_layer(channel_out)
-        return cbam_out
+        channel_out = tf.multiply(input, self.C_layer(input))
+        cbam_out = tf.multiply(channel_out, self.S_layer(channel_out))
+        return cbam_out+input
 
 
 if __name__ == "__main__":
+    input = np.random.rand(1, 128, 128, 16)
+    output = CBAM(16).call(input)
+    print(output.shape)
+
     input=tf.keras.layers.Input(shape=(128,128,16))
     output=CBAM(16)(input)
     m=tf.keras.models.Model(input,output)
