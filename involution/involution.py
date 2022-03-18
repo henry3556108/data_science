@@ -1,4 +1,6 @@
-   
+'''
+code is from https://github.com/xmu-xiaoma666/External-Attention-pytorch
+'''   
 import math
 from functools import partial
 import torch

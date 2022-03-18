@@ -1,0 +1,2 @@
+- 之後會將大神的版本改出Tensorflow的版本
+- I will translate the version in Tensorflow2
